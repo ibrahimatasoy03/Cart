@@ -1,0 +1,23 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  test-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Install dependencies
+        run: pip install pytest flake8
+        
+      - name: Run Linter (Flake8)
+        run: flake8 cart.py
+        
+      - name: Run Tests
+        run: pytest
