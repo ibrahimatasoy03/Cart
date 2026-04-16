@@ -88,7 +88,10 @@ class ShoppingCart:
 
         This method is not implemented yet.
         """
-        raise NotImplementedError("get_item_count() is not implemented yet.")
+        if self._items == {}:
+            return 0
+        
+        return sum(item["quantity"] for item in self._items.values())
 
     def _subtotal(self) -> float:
         return sum(
