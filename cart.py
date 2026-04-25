@@ -90,7 +90,7 @@ class ShoppingCart:
         """
         if self._items == {}:
             return 0
-        
+
         return sum(item["quantity"] for item in self._items.values())
 
     def _subtotal(self) -> float:
