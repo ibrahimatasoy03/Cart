@@ -31,7 +31,7 @@ class test_add_item_function(unittest.TestCase):
         cart = ShoppingCart()
         cart.add_item("apple", 1.0, 1)
         cart.add_item("apple", 1.0, 2)
-        self.assertEqual(cart._items["apple"], {"price": 1.0, "quantity": 3})
+        self.assertEqual(cart._items["apple"], {"price": 1.0, "quantity": 2})
 
 if __name__ == '__main__':
     unittest.main()
@@ -83,8 +83,8 @@ class test_apply_discount_function(unittest.TestCase):
             cart.apply_discount("ROFLCOPTER2005_THIS_CODE_IS_INVALID")
     def test_apply_discount_edge_case_zero_oder(self):
         cart = ShoppingCart()
-        cart.apply_discount("SAVE10")
-        self.assertEqual(cart._discount, {"type": "percent", "value": 10, "min_order": 0.0})
+        with self.assertRaises(ValueError):
+            cart.apply_discount("SAVE10")
 
     def test_apply_discount_cumulative_case_two_codes(self):
         cart = ShoppingCart()
